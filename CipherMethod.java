@@ -11,7 +11,7 @@ package CallbackPattern;
  */
 //CALLER
 public class CipherMethod {
-    private IEncriptable callbackFtn;   // will be instantiated in the main ?
+    private IEncriptable callbackFtn;  
     CipherMethod (IEncriptable obj){
         this.callbackFtn = obj; 
     }

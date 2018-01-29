@@ -115,10 +115,13 @@ public class TestMethod extends javax.swing.JFrame {
 
     private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
         // TODO add your handling code here:
-        Encryption en = new Encryption();
-        IEncriptable hidden_method = en.getMonoCipherMethod();
-        CipherMethod callBack = new CipherMethod(hidden_method);//caller class
-        System.out.println("some text fields:"+txtPlainText1.getText()+txtKey1.getText());
+         Encryption en = new Encryption();
+        //en.getMonoCipherMethod(); gets an implementation of IEncriptable
+        IEncriptable hiddenIEncriptable = en.getMonoCipherMethod(); //hiddenIEcriptable is a inner class of the Encryption class which is instantiated with getMonoCipherMethod()of the outer class
+        String cipher = "feather";
+        String plainText = "djlkdj";
+        //Caller 
+        CipherMethod callBack = new CipherMethod(hiddenIEncriptable);
         String encryptText = callBack.encryptText(txtPlainText1.getText(),txtKey1.getText());
         txtCipherText.setText(encryptText);
     }//GEN-LAST:event_btnEncryptActionPerformed

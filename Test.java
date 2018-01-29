@@ -12,13 +12,14 @@ package CallbackPattern;
 public class Test {
     public static void main(String[] args) {
         Encryption en = new Encryption();
-        IEncriptable hidden_method = en.getMonoCipherMethod();
-        String cipher = "aaa";
+        //en.getMonoCipherMethod(); gets an implementation of IEncriptable
+        IEncriptable hiddenIEncriptable = en.getMonoCipherMethod(); //hiddenIEcriptable is a inner class of the Encryption class which is instantiated with getMonoCipherMethod()of the outer class
+        String cipher = "feather";
         String plainText = "djlkdj";
-        CipherMethod callBack = new CipherMethod(hidden_method);
+        //Caller 
+        CipherMethod callBack = new CipherMethod(hiddenIEncriptable);
         String encryptText = callBack.encryptText(plainText, cipher);
-        
-    }
+      }
 }
 
 
