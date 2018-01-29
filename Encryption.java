@@ -68,7 +68,7 @@ public class Encryption {
                 for (int j = 0; j < cipher_chars.length; j++) {
                     if (j != i) {
                         if (cipher_chars[i] == cipher_chars[j]) {
-                            cipher_chars[j] = '0';
+                            cipher_chars[j] = '-';
                             count++;
                         }
                     }
@@ -79,7 +79,7 @@ public class Encryption {
             //System.err.println("cipher_chars: "+cipher_chars[1]);
             char[] modifiedCipher = new char[cipher_chars.length - count];
             for (int i = 0, j = 0; i < cipher_chars.length; i++) {
-                if (cipher_chars[i] != '0') {
+                if (cipher_chars[i] != '-') {
                     modifiedCipher[j] = cipher_chars[i];
                     j++;
                 }
