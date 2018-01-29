@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MidTerm;
+package CallbackPattern;
 
 /**
  *
  * @author Admin
  */
-public class Test4 {
+public class Test {
     public static void main(String[] args) {
         Encryption en = new Encryption();
         IEncriptable hidden_method = en.getMonoCipherMethod();

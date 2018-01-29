@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MidTerm;
+package CallbackPattern;
 
 /**
  *
  * @author Admin
  */
-
-public class CipherMethod {//CALLER
+//CALLER
+public class CipherMethod {
     private IEncriptable callbackFtn;   // will be instantiated in the main ?
     CipherMethod (IEncriptable obj){
         this.callbackFtn = obj; 
