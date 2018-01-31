@@ -5,15 +5,6 @@
  */
 package CallbackPattern;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.regex.*;
-
-/**
- *
- * @author Admin
- */
 public class Encryption {
 
     static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz.,-?!;";

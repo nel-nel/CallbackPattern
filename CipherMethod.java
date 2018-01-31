@@ -5,10 +5,6 @@
  */
 package CallbackPattern;
 
-/**
- *
- * @author Admin
- */
 //CALLER
 public class CipherMethod {
     private IEncriptable callbackFtn;  
