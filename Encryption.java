@@ -8,6 +8,7 @@ package CallbackPattern;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.regex.*;
 
 /**
  *
@@ -15,26 +16,23 @@ import java.util.ArrayList;
  */
 public class Encryption {
 
-    static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz.,-?!;";
     static final char[] ALPHABET_CHARS = ALPHABET.toCharArray();
 
     //inner class implements IEncriptable
     private class MonoEncryption implements IEncriptable {
 
-        @Override
+        @Override //THE ACTUAL ENCRIPTION METHOD
         public String encrypt(String plainText, String cipher) {
-            int[]map = makeCipher(cipher);
-            char[] plainTexChars = plainText.toCharArray();
-            int[] plainTextAlphabeticalIndexes = new int[plainTexChars.length];
+            char[]map = makeCipher(cipher);//BUILD THE MAP FOR ENCRYPTION FIRST
+            char[] plainTextChars = plainText.toCharArray();
             StringBuilder cipheredText = new StringBuilder();
-            //find index of every letter of plainText in the alphabet
-            for (int i = 0; i < plainTexChars.length; i++) {
+           for (int i = 0; i < plainTextChars.length; i++) {
                 for (int j = 0; j < ALPHABET_CHARS.length; j++) {
-                    if (plainTexChars[i] == ALPHABET_CHARS[j]) {//find the position in alphabet
-                        plainTextAlphabeticalIndexes[i] = j; //the value at i-th position is an index of the alphabet
-                        cipheredText.append(ALPHABET_CHARS[map[j]]);
+                    if (plainTextChars[i] == ALPHABET_CHARS[j]) {//find the position in alphabet
+                        cipheredText.append(map[j]);//append the coresponding letter from cipher
                     }
-
+                    
                 }
 
             }
@@ -45,12 +43,25 @@ public class Encryption {
 
         @Override
         public String decrypt(String cipherText, String cipher) {
-            return "decrypted text";
-        }
+          char[]map = makeCipher(cipher);//BUILD THE MAP FOR ENCRYPTION FIRST
+            StringBuilder decryptedText = new StringBuilder();
+            char[] cipherTextChars = cipherText.toCharArray();
+            for (int i = 0; i < cipherTextChars.length; i++) {
+                for (int j = 0; j < map.length; j++) {
+                    if (cipherTextChars[i] == map[j]) {//find the position in alphabet
+                       decryptedText.append(ALPHABET_CHARS[j]);//append the coresponding letter from cipher
+                    }
+                    
+                }
 
+            }
+            
+            return decryptedText.toString();
+        }
+        //GET THE COUNT OF REPEATING EACH LETTER IN ALPHABET
         private int[] getCounts(char[] cipher_chars) {
-            int[] cipher_repeat_letters = new int[26];
-            for (int i = 0; i < 26; i++) {
+            int[] cipher_repeat_letters = new int[ALPHABET_CHARS.length];
+            for (int i = 0; i < ALPHABET_CHARS.length; i++) {
                 for (int j = 0; j < cipher_chars.length; j++) {
                     if (ALPHABET_CHARS[i] == cipher_chars[j]) {
                         cipher_repeat_letters[i] += 1;
@@ -59,7 +70,7 @@ public class Encryption {
             }
             return cipher_repeat_letters;
         }
-
+        // remove repeating symbols acording to algorithm in readme.png    
         private char[] modifyCipher(String cipher) {
             char[] cipher_chars = cipher.toCharArray();
             int count = 0;
@@ -68,7 +79,7 @@ public class Encryption {
                 for (int j = 0; j < cipher_chars.length; j++) {
                     if (j != i) {
                         if (cipher_chars[i] == cipher_chars[j]) {
-                            cipher_chars[j] = '-';
+                            cipher_chars[j] = '_';
                             count++;
                         }
                     }
@@ -76,10 +87,9 @@ public class Encryption {
                 }
 
             }
-            //System.err.println("cipher_chars: "+cipher_chars[1]);
             char[] modifiedCipher = new char[cipher_chars.length - count];
             for (int i = 0, j = 0; i < cipher_chars.length; i++) {
-                if (cipher_chars[i] != '-') {
+                if (cipher_chars[i] != '_') {
                     modifiedCipher[j] = cipher_chars[i];
                     j++;
                 }
@@ -87,42 +97,45 @@ public class Encryption {
             }
             return modifiedCipher;
         }
-
-        private int[] makeCipher(String cipher) {
+        //MAKE THE CIPHER
+        private char[] makeCipher(String cipher) {
             char[] modifiedCipher = modifyCipher(cipher);
             int[] repeat_letters = getCounts(modifiedCipher);
-            int[] cipher_pad_map = new int[26];
-
-            //find the letters from cipher in alphabet and save the index in cipher_pad_map
+            int[] cipher_pad_map = new int[ALPHABET_CHARS.length];
+            char[] cipher_pad_map_letters = new char[ALPHABET_CHARS.length];
+            //find the letters from CIPHER in alphabet and save the index (in alphabet) in cipher_pad_map
             for (int i = 0, k = 0; i < modifiedCipher.length; i++) {
                 for (int j = 0; j < ALPHABET_CHARS.length; j++) {
                     if (modifiedCipher[i] == ALPHABET_CHARS[j]) {
                         cipher_pad_map[k] = j;
+                        cipher_pad_map_letters[k]=ALPHABET_CHARS[j];
+                       //System.out.println(cipher_pad_map_letters[k]);
                         k++;
-                       // System.out.println(ALPHABET_CHARS[j]);
+                      
                     }
 
                 }
 
             }
+            // add the reamining of alphabet in reveresed order
             for (int i = repeat_letters.length - 1, k = modifiedCipher.length; i >= 0; i--) {
                 if (repeat_letters[i] == 0) {
-                    cipher_pad_map[k] = i; // add the reamining of alphabet in reveresed order
+                    cipher_pad_map[k] = i; 
+                    cipher_pad_map_letters[k]=ALPHABET_CHARS[i];
+                    //System.out.println(cipher_pad_map_letters[k]);
                     k++;
-                    //System.out.println(ALPHABET_CHARS[i]);
+                   
                 }
 
             }
             
-            return cipher_pad_map;
+            return cipher_pad_map_letters;
         }
-
     }
-
     // 
     IEncriptable getMonoCipherMethod() { //access the inner class implementation through the interface 
         return new MonoEncryption();
     }
-;
+
 
 }

@@ -31,9 +31,9 @@ public class TestMethod extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        txtCipherText = new javax.swing.JTextField();
+        CipherText_txt = new javax.swing.JTextField();
         txtKey1 = new javax.swing.JTextField();
-        txtPlainText1 = new javax.swing.JTextField();
+        PlainText_txt = new javax.swing.JTextField();
         btnEncrypt = new javax.swing.JButton();
         btnDencrypt = new javax.swing.JButton();
         lblKey = new javax.swing.JLabel();
@@ -56,6 +56,11 @@ public class TestMethod extends javax.swing.JFrame {
 
         btnDencrypt.setText("Dencrypt");
         btnDencrypt.setToolTipText("");
+        btnDencrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDencryptActionPerformed(evt);
+            }
+        });
 
         lblKey.setText("Key");
 
@@ -83,8 +88,8 @@ public class TestMethod extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtKey1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPlainText1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCipherText, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PlainText_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CipherText_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblKey))
                         .addContainerGap(21, Short.MAX_VALUE))))
         );
@@ -98,13 +103,13 @@ public class TestMethod extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPlainText1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PlainText_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCipherText, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CipherText_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDencrypt)
                 .addContainerGap(81, Short.MAX_VALUE))
@@ -118,13 +123,21 @@ public class TestMethod extends javax.swing.JFrame {
          Encryption en = new Encryption();
         //en.getMonoCipherMethod(); gets an implementation of IEncriptable
         IEncriptable hiddenIEncriptable = en.getMonoCipherMethod(); //hiddenIEcriptable is a inner class of the Encryption class which is instantiated with getMonoCipherMethod()of the outer class
-        String cipher = "feather";
-        String plainText = "djlkdj";
         //Caller 
         CipherMethod callBack = new CipherMethod(hiddenIEncriptable);
-        String encryptText = callBack.encryptText(txtPlainText1.getText(),txtKey1.getText());
-        txtCipherText.setText(encryptText);
+        String encryptText = callBack.encryptText(PlainText_txt.getText(),txtKey1.getText());
+        CipherText_txt.setText(encryptText);
     }//GEN-LAST:event_btnEncryptActionPerformed
+
+    private void btnDencryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDencryptActionPerformed
+        Encryption en = new Encryption();
+        //en.getMonoCipherMethod(); gets an implementation of IEncriptable
+        IEncriptable hiddenIEncriptable = en.getMonoCipherMethod(); //hiddenIEcriptable is a inner class of the Encryption class which is instantiated with getMonoCipherMethod()of the outer class
+        //Caller 
+        CipherMethod callBack = new CipherMethod(hiddenIEncriptable);
+        String decryptText = callBack.decryptText(CipherText_txt.getText(),txtKey1.getText());
+        PlainText_txt.setText(decryptText);
+    }//GEN-LAST:event_btnDencryptActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +173,8 @@ public class TestMethod extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CipherText_txt;
+    private javax.swing.JTextField PlainText_txt;
     private javax.swing.JButton btnDencrypt;
     private javax.swing.JButton btnEncrypt;
     private javax.swing.JLabel jLabel1;
@@ -167,8 +182,6 @@ public class TestMethod extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblKey;
-    private javax.swing.JTextField txtCipherText;
     private javax.swing.JTextField txtKey1;
-    private javax.swing.JTextField txtPlainText1;
     // End of variables declaration//GEN-END:variables
 }

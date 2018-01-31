@@ -58,8 +58,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" pref="68" max="-2" attributes="0"/>
                           <Component id="txtKey1" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                          <Component id="txtPlainText1" alignment="0" min="-2" pref="306" max="-2" attributes="0"/>
-                          <Component id="txtCipherText" alignment="0" min="-2" pref="306" max="-2" attributes="0"/>
+                          <Component id="PlainText_txt" alignment="0" min="-2" pref="306" max="-2" attributes="0"/>
+                          <Component id="CipherText_txt" alignment="0" min="-2" pref="306" max="-2" attributes="0"/>
                           <Component id="lblKey" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -78,14 +78,14 @@
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="14" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtPlainText1" min="-2" pref="69" max="-2" attributes="0"/>
+              <Component id="PlainText_txt" min="-2" pref="69" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="btnEncrypt" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtCipherText" min="-2" pref="64" max="-2" attributes="0"/>
+              <Component id="CipherText_txt" min="-2" pref="64" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnDencrypt" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="81" max="32767" attributes="0"/>
@@ -94,11 +94,11 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="txtCipherText">
+    <Component class="javax.swing.JTextField" name="CipherText_txt">
     </Component>
     <Component class="javax.swing.JTextField" name="txtKey1">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPlainText1">
+    <Component class="javax.swing.JTextField" name="PlainText_txt">
     </Component>
     <Component class="javax.swing.JButton" name="btnEncrypt">
       <Properties>
@@ -114,6 +114,9 @@
         <Property name="text" type="java.lang.String" value="Dencrypt"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDencryptActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblKey">
       <Properties>
