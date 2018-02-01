@@ -7,7 +7,7 @@ package CallbackPattern;
 
 public class Encryption {
 
-    static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz.,-?!;";
+    static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
     static final char[] ALPHABET_CHARS = ALPHABET.toCharArray();
 
     //inner class implements IEncriptable
