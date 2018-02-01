@@ -67,10 +67,11 @@ public class Encryption {
             int count = 0;
 
             for (int i = 0; i < cipher_chars.length; i++) {
-                for (int j = 0; j < cipher_chars.length; j++) {
-                    if (j != i) {
+                for (int j = i+1; j < cipher_chars.length; j++) {
+                    if (cipher_chars[i]!='_') {
                         if (cipher_chars[i] == cipher_chars[j]) {
                             cipher_chars[j] = '_';
+                            System.out.println(cipher_chars[i]);
                             count++;
                         }
                     }
